@@ -13,7 +13,7 @@
             <TextBox Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
         </ToolBar>
         <Button DockPanel.Dock="Top" Content="Get Data" Command="{Binding GetTempCommand}"/>
-        <!-- TODO 01b : Ajouter la ListView qui est liée avec la collection de Temperatures -->
+        <!-- XTODO 01b : Ajouter la ListView qui est liée avec la collection de Temperatures -->
         <Grid>
             <ListView ItemsSource="{Binding Temperatures}">
             <ListView.ItemTemplate>
