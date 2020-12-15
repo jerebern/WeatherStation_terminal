@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using WeatherApp.Commands;
 using WeatherApp.Services;
 
@@ -67,6 +68,7 @@ namespace WeatherApp.ViewModels
         /// TODO 02 : Ajouter ExportCommand
         /// </summary>
         public DelegateCommand<string> ExportCommand { get; set; }
+        public DelegateCommand<string> ChangeLangueCommand { get; set; }
 
 
         /// <summary>
@@ -93,7 +95,7 @@ namespace WeatherApp.ViewModels
             /// 
 
             ExportCommand = new DelegateCommand<string>(Export,CanExport);
-
+            ChangeLangueCommand = new DelegateCommand<string>(ChangeLanguage);
 
             /// TODO 03 : Instancier ImportCommand qui doit appeler la méthode Import
             ImportCommand = new DelegateCommand<string>(Import);
@@ -282,6 +284,13 @@ namespace WeatherApp.ViewModels
             /// TODO 13c : Compléter la méthode pour permettre de changer la langue
             /// Ne pas oublier de demander à l'utilisateur de redémarrer l'application
             /// Aide : ApiConsumerDemo
+            /// 
+            Properties.Settings.Default.Language = language;
+            Properties.Settings.Default.Save();
+            string path = Application.ResourceAssembly.Location;
+            string filtoStart = Path.ChangeExtension(path, ".exe");
+            System.Diagnostics.Process.Start(filtoStart);
+            Application.Current.Shutdown();
         }
 
         #endregion

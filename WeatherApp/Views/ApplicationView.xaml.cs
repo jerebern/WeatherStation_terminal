@@ -1,4 +1,5 @@
 ﻿using OpenWeatherAPI;
+using System.Threading;
 using System.Windows;
 using WeatherApp.Services;
 using WeatherApp.ViewModels;
@@ -14,6 +15,7 @@ namespace WeatherApp
 
         public ApplicationView()
         {
+
             InitializeComponent();
 
             ApiHelper.InitializeClient();
