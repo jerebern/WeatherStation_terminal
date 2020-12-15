@@ -1,10 +1,13 @@
-﻿using Ookii.Dialogs.Wpf;
+﻿using Newtonsoft.Json;
+using Ookii.Dialogs.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using WeatherApp.Commands;
+using WeatherApp.Models;
 using WeatherApp.Services;
 
 namespace WeatherApp.ViewModels
@@ -164,7 +167,17 @@ namespace WeatherApp.ViewModels
         private bool CanExport(string obj)
         {
             // a faire 
-            return true;
+            Debug.WriteLine(tvm.Temperatures.Count());
+           if (tvm.Temperatures.Count() < -1)
+            {
+                return true;
+
+            }
+            else
+            {
+                return true;
+
+            }
         }
 
         /// <summary>
@@ -221,9 +234,12 @@ namespace WeatherApp.ViewModels
             /// Fermer le fichier         
             /// 
 
+     
+            var json = JsonConvert.SerializeObject(tvm.Temperatures.ToArray(), Formatting.Indented);
             using (var tw = new StreamWriter(Filename, false))
             {
-                tw.WriteLine(tvm.RawText);
+
+                tw.WriteLine(json);
                 tw.Close();
             }
         }
@@ -244,10 +260,23 @@ namespace WeatherApp.ViewModels
             /// Désérialiser dans un liste de TemperatureModel
             /// Remplacer le contenu de la collection de Temperatures avec la nouvelle liste
             /// 
+
+
+            List<TemperatureModel> data;
             using (var sr = new StreamReader(Filename))
             {
-                tvm.RawText += sr.ReadToEnd();
+
+                var fileContent = sr.ReadToEnd();
+
+                data = JsonConvert.DeserializeObject<List<TemperatureModel>>(fileContent);
             }
+
+            foreach(TemperatureModel temp in data)
+            {
+                tvm.Temperatures.Add(temp);
+            }
+
+
 
         }
 

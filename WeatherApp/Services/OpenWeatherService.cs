@@ -1,6 +1,7 @@
 ﻿using OpenWeatherAPI;
 using System;
 using System.Threading.Tasks;
+using System.Windows;
 using WeatherApp.Models;
 using WeatherApp.ViewModels;
 
@@ -19,15 +20,27 @@ namespace WeatherApp.Services
         public async Task<TemperatureModel> GetTempAsync()
         {
             var temp = await owp.GetCurrentWeatherAsync();
+            var result = new TemperatureModel();
 
-            var result = new TemperatureModel
+            if(temp != null)
             {
-                City = temp.Name,
-                DateTime = DateTime.UnixEpoch.AddSeconds(temp.DateTime).ToLocalTime(),
-                Temperature = temp.Main.Temperature
-            };
+                 result = new TemperatureModel
+                {
+                    City = temp.Name,
+                    DateTime = DateTime.UnixEpoch.AddSeconds(temp.DateTime).ToLocalTime(),
+                    Temperature = temp.Main.Temperature
+                };
+
+                return result;
+
+            }
+            else
+            {
+                MessageBox.Show("API KEY OR CITY NULL :(  ");
+            }
 
             return result;
+
         }
 
         public void SetLocation(string location)

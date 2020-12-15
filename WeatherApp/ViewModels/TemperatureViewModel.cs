@@ -77,6 +77,7 @@ namespace WeatherApp.ViewModels
             lastTemp = new TemperatureModel();
 
             GetTempCommand = new DelegateCommand<string>(GetTemp, CanGetTemp);
+
         }
 
 
@@ -112,6 +113,7 @@ namespace WeatherApp.ViewModels
 
                     Temperatures.Insert(0, CurrentTemp);
                     lastTemp = currentTemp;
+                    RawText += currentTemp.ToString();
 
                 }
 
