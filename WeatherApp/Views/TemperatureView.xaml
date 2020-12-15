@@ -15,7 +15,7 @@
         </ToolBar>
         <Button DockPanel.Dock="Top" Content="{x:Static p:Resources.btn_getData}" Command="{Binding GetTempCommand}"/>
         <!-- XTODO 01b : Ajouter la ListView qui est liée avec la collection de Temperatures -->
-        <Grid>
+        <!--<Grid>
             <ListView ItemsSource="{Binding Temperatures}">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -28,10 +28,37 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-          </Grid>
+          </Grid>-->
 
+        <Grid>
+            <ListView ItemsSource="{Binding Temperatures}" SelectedItem="">
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="{x:Type models:TemperatureModel}">
+                        <Border BorderThickness="1" BorderBrush="Black">
+                            <Grid Width="250">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static p:Resources.lbl_city}"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static p:Resources.lbl_temperature}"/>
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static p:Resources.lbl_dataTime}" Panel.ZIndex="7"/>
 
-                <!-- Voir la solution 14_pratique_examen, projet : demo_listView -->
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding City}"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Temperature}"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding DateTime}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <!-- Voir la solution 14_pratique_examen, projet : demo_listView -->
         <ListView/>
 
     </DockPanel>
