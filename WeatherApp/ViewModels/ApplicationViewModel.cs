@@ -228,7 +228,11 @@ namespace WeatherApp.ViewModels
                 openFileDialog = new VistaOpenFileDialog();
                 openFileDialog.Filter = "Json file|*.json|All files|*.*";
                 openFileDialog.DefaultExt = "json";
+                openFileDialog.ShowDialog();
+                Filename = openFileDialog.FileName;
+                openFromFile();
             }
+
 
             /// TODO 04 : Commande d'importation : Code pour afficher la boîte de dialogue
             /// Voir
