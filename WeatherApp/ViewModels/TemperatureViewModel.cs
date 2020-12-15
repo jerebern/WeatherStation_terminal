@@ -11,6 +11,7 @@ namespace WeatherApp.ViewModels
     public class TemperatureViewModel : BaseViewModel
     {
         private TemperatureModel currentTemp;
+        private TemperatureModel lastTemp;
         private string city;
 
         public ITemperatureService TemperatureService { get; private set; }
@@ -73,6 +74,7 @@ namespace WeatherApp.ViewModels
         {
             Name = this.GetType().Name;
             Temperatures = new ObservableCollection<TemperatureModel>();
+            lastTemp = new TemperatureModel();
 
             GetTempCommand = new DelegateCommand<string>(GetTemp, CanGetTemp);
         }
@@ -104,6 +106,14 @@ namespace WeatherApp.ViewModels
                 /// dernière température insérée dans la liste est différente
                 /// que celle que l'on vient de récupérer.
                 /// Utiliser la méthode Insert de la collection
+                /// 
+                if((lastTemp.DateTime.Date.Hour != currentTemp.DateTime.Hour) && (lastTemp.City != currentTemp.City))
+                {
+
+                    Temperatures.Insert(0, CurrentTemp);
+                    lastTemp = currentTemp;
+
+                }
 
                 Debug.WriteLine(CurrentTemp);
             }
