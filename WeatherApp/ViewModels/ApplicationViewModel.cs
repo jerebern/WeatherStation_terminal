@@ -1,6 +1,7 @@
 ﻿using Ookii.Dialogs.Wpf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using WeatherApp.Commands;
 using WeatherApp.Services;
@@ -218,6 +219,11 @@ namespace WeatherApp.ViewModels
             /// Lire le contenu du fichier
             /// Désérialiser dans un liste de TemperatureModel
             /// Remplacer le contenu de la collection de Temperatures avec la nouvelle liste
+            /// 
+            using (var sr = new StreamReader(Filename))
+            {
+                tvm.RawText += sr.ReadToEnd();
+            }
 
         }
 
