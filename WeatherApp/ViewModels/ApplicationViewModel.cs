@@ -90,6 +90,10 @@ namespace WeatherApp.ViewModels
 
             /// TODO 06 : Instancier ExportCommand qui doit appeler la méthode Export
             /// Ne peut s'exécuter que la méthode CanExport retourne vrai
+            /// 
+
+            ExportCommand = new DelegateCommand<string>(Export,CanExport);
+
 
             /// TODO 03 : Instancier ImportCommand qui doit appeler la méthode Import
             ImportCommand = new DelegateCommand<string>(Import);
@@ -157,7 +161,8 @@ namespace WeatherApp.ViewModels
         /// <returns></returns>
         private bool CanExport(string obj)
         {
-            throw new NotImplementedException();
+            // a faire 
+            return true;
         }
 
         /// <summary>
@@ -167,12 +172,19 @@ namespace WeatherApp.ViewModels
         private void Export(string obj)
         {
 
-            if (saveFileDialog == null)
-            {
-                saveFileDialog = new VistaSaveFileDialog();
-                saveFileDialog.Filter = "Json file|*.json|All files|*.*";
-                saveFileDialog.DefaultExt = "json";
+  
+                if (saveFileDialog == null)
+                {
+                    saveFileDialog = new VistaSaveFileDialog();
+                    saveFileDialog.Filter = "Json file|*.json|All files|*.*";
+                    saveFileDialog.DefaultExt = "json";
+                    saveFileDialog.ShowDialog();
+                    Filename = saveFileDialog.FileName;
+                    saveToFile();
+
             }
+
+            
 
             /// TODO 08 : Code pour afficher la boîte de dialogue de sauvegarde
             /// Voir
