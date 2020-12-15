@@ -180,7 +180,11 @@ namespace WeatherApp.ViewModels
                     saveFileDialog.DefaultExt = "json";
                     saveFileDialog.ShowDialog();
                     Filename = saveFileDialog.FileName;
-                    saveToFile();
+                        if(filename != "")
+                        {
+                            saveToFile();
+
+                        }
 
             }
 
@@ -254,7 +258,10 @@ namespace WeatherApp.ViewModels
                 openFileDialog.DefaultExt = "json";
                 openFileDialog.ShowDialog();
                 Filename = openFileDialog.FileName;
-                openFromFile();
+                if (filename != "")
+                {
+                    openFromFile();
+                }
             }
 
 
