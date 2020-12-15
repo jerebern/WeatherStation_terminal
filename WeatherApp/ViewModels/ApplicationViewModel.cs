@@ -212,8 +212,14 @@ namespace WeatherApp.ViewModels
             /// Initilisation du StreamWriter
             /// Sérialiser la collection de températures
             /// Écrire dans le fichier
-            /// Fermer le fichier           
+            /// Fermer le fichier         
+            /// 
 
+            using (var tw = new StreamWriter(Filename, false))
+            {
+                tw.WriteLine(tvm.RawText);
+                tw.Close();
+            }
         }
 
         private void openFromFile()
